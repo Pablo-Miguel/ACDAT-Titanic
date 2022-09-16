@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Dam
- *
- */
-module Titanic {
-}
