@@ -1,6 +1,6 @@
 package titanic.servicio;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import titanic.enums.Pais;
 import titanic.enums.Zona;
@@ -9,7 +9,7 @@ public class Pasajero extends Persona {
 	
 	private Integer num_habitacion;
 
-	public Pasajero(String dni, String nombre, Date fecha_nac, Boolean minusvalia, Zona zona, Pais pais,
+	public Pasajero(String dni, String nombre, LocalDate fecha_nac, Boolean minusvalia, Zona zona, Pais pais,
 			Integer num_habitacion) {
 		super(dni, nombre, fecha_nac, minusvalia, zona, pais);
 		this.num_habitacion = num_habitacion;

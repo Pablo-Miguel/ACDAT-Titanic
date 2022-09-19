@@ -1,6 +1,6 @@
 package titanic.servicio;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import titanic.enums.Pais;
 import titanic.enums.Responsabilidad;
@@ -10,7 +10,7 @@ public class Tripulante extends Persona {
 
 	private Responsabilidad responsabilidad;
 
-	public Tripulante(String dni, String nombre, Date fecha_nac, Boolean minusvalia, Zona zona, Pais pais,
+	public Tripulante(String dni, String nombre, LocalDate fecha_nac, Boolean minusvalia, Zona zona, Pais pais,
 			Responsabilidad responsabilidad) {
 		super(dni, nombre, fecha_nac, minusvalia, zona, pais);
 		this.responsabilidad = responsabilidad;

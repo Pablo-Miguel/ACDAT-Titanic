@@ -1,5 +1,6 @@
 package titanic.servicio;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
@@ -10,12 +11,12 @@ import titanic.enums.Zona;
 public class Persona {
 	
 	private String dni, nombre;
-	private Date fecha_nac;
+	private LocalDate fecha_nac;
 	private Boolean minusvalia;
 	private Zona zona;
 	private Pais pais;
 	
-	public Persona(String dni, String nombre, Date fecha_nac, Boolean minusvalia, Zona zona, Pais pais) {
+	public Persona(String dni, String nombre, LocalDate fecha_nac, Boolean minusvalia, Zona zona, Pais pais) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -41,11 +42,11 @@ public class Persona {
 		this.nombre = nombre;
 	}
 
-	public Date getFecha_nac() {
+	public LocalDate getFecha_nac() {
 		return fecha_nac;
 	}
 
-	public void setFecha_nac(Date fecha_nac) {
+	public void setFecha_nac(LocalDate fecha_nac) {
 		this.fecha_nac = fecha_nac;
 	}
 

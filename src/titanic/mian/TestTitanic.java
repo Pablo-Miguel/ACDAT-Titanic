@@ -1,10 +1,12 @@
 package titanic.mian;
 
+import titanic.controlador.GestionTitanic;
+
 public class TestTitanic {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World");
-		
+		GestionTitanic gestionTitanic = new GestionTitanic();
+		gestionTitanic.startProgram();
 	}
 
 }
