@@ -1,5 +1,7 @@
 package titanic.servicio;
 
+import java.util.Objects;
+
 import titanic.enums.Zona;
 
 public class Bote {
@@ -37,6 +39,23 @@ public class Bote {
 
 	public void setZona(Zona zona) {
 		this.zona = zona;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(boteID);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bote other = (Bote) obj;
+		return Objects.equals(boteID, other.boteID);
 	}
 
 	@Override

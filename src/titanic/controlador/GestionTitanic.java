@@ -2,13 +2,16 @@ package titanic.controlador;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
-import titanic.colas.Cola;
+import titanic.colas.Mapa;
 import titanic.daos.DAOBotes;
 import titanic.daos.DAOPersonas;
+import titanic.enums.Zona;
 import titanic.servicio.Bote;
 import titanic.servicio.Pasajero;
 import titanic.servicio.Persona;
+import titanic.servicio.Persona.CompararPorPaisyNombre;
 import titanic.servicio.Tripulante;
 
 public class GestionTitanic {
@@ -17,13 +20,16 @@ public class GestionTitanic {
 	private ArrayList<Bote> listaBotes;
 	private ArrayList<Pasajero> listaPasajeros;
 	private ArrayList<Tripulante> listaTripulantes;
+	private Mapa mapaBote;
 	
 	public GestionTitanic() {
 		super();
 		this.listaPersonas = DAOPersonas.getInstance().getPersonas();
+		Collections.sort(listaPersonas, new CompararPorPaisyNombre());
 		this.listaBotes = DAOBotes.getInstance().getBotes();
 		this.listaPasajeros = new ArrayList<Pasajero>();
 		this.listaTripulantes = new ArrayList<Tripulante>();
+		this.mapaBote = Mapa.creaMapa();
 	}
 
 	public ArrayList<Persona> getListaPersonas() {
@@ -44,21 +50,64 @@ public class GestionTitanic {
 	
 	public void startProgram() {
 		separarPasajerosYTripulantes();
-		establecerOrdenBotesPasajeros();
+		meterMenoresEdadProa();
 	}
 	
-	private void establecerOrdenBotesPasajeros() {
+	private void meterMenoresEdadProa() {
+		Pasajero pasajeroTemp;
+		Bote bote = getBotesProa();
 		for(int i = 0; i < listaPasajeros.size(); i++) {
-			if(listaPasajeros.get(i).getFecha_nac().isAfter(LocalDate.of(LocalDate.now().getYear() - 18, LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth()))) {
+			if(comprobarMenorEdad(i) && listaPasajeros.get(i).getZona() == Zona.PROA) {
 				//Si son menores de edad comprobar
+				
+				mapaBote.insMapa(bote, listaPasajeros.get(i));
+				
+				pasajeroTemp = listaPasajeros.get(i);
+				
+				listaPasajeros.remove(listaPasajeros.get(i));
+				
+				meterHermanosMenoresDelMenor(pasajeroTemp, bote);
 				
 			}
 			else {
 				//Si no son menores de edad comprobar
 				
 			}
+			
 		}
 		
+		System.out.println(mapaBote.toString());
+		
+		
+	}
+	
+	private Bote getBotesProa() {
+		Bote boteTemp;
+		for(int i = 0; i < listaBotes.size(); i++) {
+			if(listaBotes.get(i).getZona() == Zona.PROA) {
+				boteTemp = listaBotes.get(i);
+				listaBotes.remove(boteTemp);
+				return boteTemp;
+			}
+		}
+		return null;
+		
+	}
+
+	private void meterHermanosMenoresDelMenor(Pasajero pasajero, Bote bote) {
+		for(int i = 0; i < listaPasajeros.size(); i++) {
+			if(pasajero.getNum_habitacion() == listaPasajeros.get(i).getNum_habitacion() && comprobarMenorEdad(i)) {
+				
+				mapaBote.insMapa(bote, listaPasajeros.get(i));
+				listaPasajeros.remove(listaPasajeros.get(i));
+				
+			}
+		}
+		
+	}
+
+	private boolean comprobarMenorEdad(int i) {
+		return listaPasajeros.get(i).getFecha_nac().isAfter(LocalDate.of(LocalDate.now().getYear() - 18, LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth()));
 	}
 
 	private void separarPasajerosYTripulantes() {
