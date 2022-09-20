@@ -90,7 +90,7 @@ public class Mapa implements IMapa {
 	public String convertWithStream() {
 	    String mapAsString = mapaBotes.keySet().stream()
 	      .map(key -> key + "  ====>  " + mapaBotes.get(key).toString())
-	      .collect(Collectors.joining(", ", "{", "}"));
+	      .collect(Collectors.joining("\n"));
 	    return mapAsString;
 	}
 }

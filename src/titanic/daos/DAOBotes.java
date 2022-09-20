@@ -32,10 +32,10 @@ public class DAOBotes {
         
         if(listaBotes.isEmpty()){
         	
-            listaBotes.add(new Bote(5, Zona.PROA));
+            listaBotes.add(new Bote(10, Zona.PROA));
             listaBotes.add(new Bote(10, Zona.POPA));
-            listaBotes.add(new Bote(8, Zona.BABOR));
-            listaBotes.add(new Bote(7, Zona.ESTRIBOR));
+            listaBotes.add(new Bote(10, Zona.BABOR));
+            listaBotes.add(new Bote(10, Zona.ESTRIBOR));
             
             return listaBotes;
         }

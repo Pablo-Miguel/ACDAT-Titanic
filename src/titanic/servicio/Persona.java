@@ -119,4 +119,14 @@ public class Persona {
 
 	}
 	
+	public static class CompararPorEdad implements Comparator<Persona> {
+
+	    @Override
+	    public int compare(Persona persona1, Persona persona2) {
+	            return persona1.getFecha_nac().compareTo(persona2.getFecha_nac());
+
+	    }
+
+	}
+	
 }

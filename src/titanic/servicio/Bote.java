@@ -1,5 +1,6 @@
 package titanic.servicio;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 import titanic.enums.Zona;
@@ -61,6 +62,15 @@ public class Bote {
 	@Override
 	public String toString() {
 		return "Bote [boteID=" + boteID + ", num_plazas=" + num_plazas + ", zona=" + zona + "]";
+	}
+	
+	public static class ComprarPorPlazas implements Comparator<Bote> {
+
+	    @Override
+	    public int compare(Bote bote1, Bote bote2) {
+	    	return bote1.getNum_plazas().compareTo(bote2.getNum_plazas());
+	    }
+
 	}
 	
 }
