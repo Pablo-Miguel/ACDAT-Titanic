@@ -90,11 +90,18 @@ public class Persona {
 		Persona other = (Persona) obj;
 		return Objects.equals(dni, other.dni) && pais == other.pais;
 	}
-
+	
+	/*
 	@Override
 	public String toString() {
 		return "dni=" + dni + ", nombre=" + nombre + ", fecha_nac=" + fecha_nac + ", minusvalia=" + minusvalia
 				+ ", zona=" + zona + ", pais=" + pais;
+	}
+	*/
+	
+	@Override
+	public String toString() {
+		return nombre;
 	}
 
 	public static class CompararPorPaisyNombre implements Comparator<Persona> {

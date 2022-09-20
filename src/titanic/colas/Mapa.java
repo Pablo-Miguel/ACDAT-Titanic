@@ -3,6 +3,7 @@ package titanic.colas;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import titanic.interfaces.IMapa;
 import titanic.servicio.Bote;
@@ -37,17 +38,17 @@ public class Mapa implements IMapa {
 
 	@Override
 	public Integer insMapa(Bote bote, Persona persona) {
-		ArrayList<Persona> listaTemp = mapaBotes.get(bote);
-		if(listaTemp == null) {
+		//ArrayList<Persona> listaTemp = mapaBotes.get(bote);
+		if(mapaBotes.get(bote) == null) {
 			if(bote.getNum_plazas() >= 1) {
-				listaTemp = new ArrayList<Persona>();
-				listaTemp.add(persona);
+				mapaBotes.put(bote, new ArrayList<Persona>());
+				mapaBotes.get(bote).add(persona);
 				bote.setNum_plazas(bote.getNum_plazas()-1);
 				return 0;
 			}
 		} else {
 			if(bote.getNum_plazas() >= 1) {
-				listaTemp.add(persona);
+				mapaBotes.get(bote).add(persona);
 				bote.setNum_plazas(bote.getNum_plazas()-1);
 				return 0;
 			}
@@ -83,6 +84,13 @@ public class Mapa implements IMapa {
 
 	@Override
 	public String toString() {
-		return "Mapa [" + mapaBotes.toString() + "]";
+		return "Mapa [" + mapaBotes + "]";
+	}
+	
+	public String convertWithStream() {
+	    String mapAsString = mapaBotes.keySet().stream()
+	      .map(key -> key + "  ====>  " + mapaBotes.get(key).toString())
+	      .collect(Collectors.joining(", ", "{", "}"));
+	    return mapAsString;
 	}
 }

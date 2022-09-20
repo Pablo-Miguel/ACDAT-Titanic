@@ -1,24 +1,21 @@
 package titanic.enums;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public enum Zona {
-	PROA(), POPA(), BABOR(), ESTRIBOR();
+	PROA(List.of(4, 9, 24)), POPA(List.of(5, 7, 45)), BABOR(List.of(34, 23, 12)), ESTRIBOR(List.of(1, 21, 14));
 	
-	private ArrayList<Integer> escalerasAcceso;
-	
-	private Zona() {
-	}
+	private List<Integer> escalerasAcceso;
 
-	private Zona(ArrayList<Integer> escalerasAcceso) {
+	private Zona(List<Integer> escalerasAcceso) {
 		this.escalerasAcceso = escalerasAcceso;
 	}
 
-	public ArrayList<Integer> getEscalerasAcceso() {
+	public List<Integer> getEscalerasAcceso() {
 		return escalerasAcceso;
 	}
 
-	public void setEscalerasAcceso(ArrayList<Integer> escalerasAcceso) {
+	public void setEscalerasAcceso(List<Integer> escalerasAcceso) {
 		this.escalerasAcceso = escalerasAcceso;
 	}
 	

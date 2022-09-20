@@ -51,33 +51,34 @@ public class GestionTitanic {
 	public void startProgram() {
 		separarPasajerosYTripulantes();
 		meterMenoresEdadProa();
+		System.out.println(mapaBote.convertWithStream());
+
 	}
 	
 	private void meterMenoresEdadProa() {
 		Pasajero pasajeroTemp;
 		Bote bote = getBotesProa();
-		for(int i = 0; i < listaPasajeros.size(); i++) {
-			if(comprobarMenorEdad(i) && listaPasajeros.get(i).getZona() == Zona.PROA) {
-				//Si son menores de edad comprobar
-				
-				mapaBote.insMapa(bote, listaPasajeros.get(i));
-				
-				pasajeroTemp = listaPasajeros.get(i);
-				
-				listaPasajeros.remove(listaPasajeros.get(i));
-				
-				meterHermanosMenoresDelMenor(pasajeroTemp, bote);
+		if(bote != null) {
+			for(int i = 0; i < listaPasajeros.size(); i++) {
+				if(comprobarMenorEdad(i) && listaPasajeros.get(i).getZona() == Zona.PROA) {
+					//Si son menores de edad comprobar
+					
+					mapaBote.insMapa(bote, listaPasajeros.get(i));
+					
+					pasajeroTemp = listaPasajeros.get(i);
+					
+					listaPasajeros.remove(listaPasajeros.get(i));
+					
+					meterHermanosMenoresDelMenor(pasajeroTemp, bote);
+					
+				}
+				else {
+					//Si no son menores de edad comprobar
+					
+				}
 				
 			}
-			else {
-				//Si no son menores de edad comprobar
-				
-			}
-			
 		}
-		
-		System.out.println(mapaBote.toString());
-		
 		
 	}
 	

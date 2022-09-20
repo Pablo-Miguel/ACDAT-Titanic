@@ -22,10 +22,17 @@ public class Pasajero extends Persona {
 	public void setNum_habitacion(Integer num_habitacion) {
 		this.num_habitacion = num_habitacion;
 	}
-
+	
+	/*
 	@Override
 	public String toString() {
 		return "Pasajero [" + super.toString() + ", num_habitacion=" + num_habitacion + "]";
+	}
+	*/
+	
+	@Override
+	public String toString() {
+		return "[" + super.toString() + "]";
 	}
 	
 	
