@@ -57,7 +57,7 @@ public class GestionTitanic {
 		this.listaBotes = listaBotes;
 	}
 	
-	public void startProgram() {
+	public void startProgram() throws InterruptedException {
 		separarPasajerosYTripulantes();
 		
 		for(int i = 0; i < Zona.getVectZona().length; i++) {
@@ -86,10 +86,7 @@ public class GestionTitanic {
 			}
 		}
 		
-		vista.mostrarMapaVista();
-		
-		//System.out.println(mapaBote.convertWithStream());
-		//System.out.println(listaPasajeros.toString());
+		vista.mostrarMapaVista(mapaBote);
 
 	}
 	
