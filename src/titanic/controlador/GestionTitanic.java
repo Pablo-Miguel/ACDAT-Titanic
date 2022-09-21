@@ -16,11 +16,13 @@ import titanic.servicio.Persona;
 import titanic.servicio.Persona.CompararPorEdad;
 import titanic.servicio.Tripulante;
 import titanic.servicio.Tripulante.CompararPorRango;
+import titanic.vista.Vista;
 
 public class GestionTitanic {
 	private final Integer EDAD_MIN_ANCIANO = 65;
 	private final Integer MAYORIA_EDAD = 18;
 	private Random random = new Random();
+	private Vista vista;
 	
 	private ArrayList<Persona> listaPersonas;
 	private ArrayList<Bote> listaBotes;
@@ -30,6 +32,8 @@ public class GestionTitanic {
 	
 	public GestionTitanic() {
 		super();
+		this.vista = new Vista();
+		
 		this.listaPersonas = DAOPersonas.getInstance().getPersonas();
 		this.listaBotes = DAOBotes.getInstance().getBotes();
 		this.listaPasajeros = new ArrayList<Pasajero>();
@@ -82,8 +86,10 @@ public class GestionTitanic {
 			}
 		}
 		
-		System.out.println(mapaBote.convertWithStream());
-		System.out.println(listaPasajeros.toString());
+		vista.mostrarMapaVista();
+		
+		//System.out.println(mapaBote.convertWithStream());
+		//System.out.println(listaPasajeros.toString());
 
 	}
 	
