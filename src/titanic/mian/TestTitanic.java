@@ -1,12 +1,12 @@
 package titanic.mian;
 
-import titanic.controlador.GestionTitanic;
+import titanic.controlador.Controlador;
 
 public class TestTitanic {
 
 	public static void main(String[] args) throws InterruptedException {
-		GestionTitanic gestionTitanic = new GestionTitanic();
-		gestionTitanic.startProgram();
+		Controlador controlador = new Controlador();
+		controlador.start();
 	}
 
 }

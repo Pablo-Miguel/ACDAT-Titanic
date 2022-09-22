@@ -1,4 +1,4 @@
-package titanic.controlador;
+package titanic.servicio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,12 +9,8 @@ import titanic.colas.Mapa;
 import titanic.daos.DAOBotes;
 import titanic.daos.DAOPersonas;
 import titanic.enums.Zona;
-import titanic.servicio.Bote;
 import titanic.servicio.Bote.ComprarPorPlazas;
-import titanic.servicio.Pasajero;
-import titanic.servicio.Persona;
 import titanic.servicio.Persona.CompararPorEdad;
-import titanic.servicio.Tripulante;
 import titanic.servicio.Tripulante.CompararPorRango;
 import titanic.vista.Vista;
 
@@ -22,8 +18,7 @@ public class GestionTitanic {
 	private final Integer EDAD_MIN_ANCIANO = 65;
 	private final Integer MAYORIA_EDAD = 18;
 	private Random random = new Random();
-	private Vista vista;
-	
+
 	private ArrayList<Persona> listaPersonas;
 	private ArrayList<Bote> listaBotes;
 	private ArrayList<Pasajero> listaPasajeros;
@@ -32,7 +27,6 @@ public class GestionTitanic {
 	
 	public GestionTitanic() {
 		super();
-		this.vista = new Vista();
 		
 		this.listaPersonas = DAOPersonas.getInstance().getPersonas();
 		this.listaBotes = DAOBotes.getInstance().getBotes();
@@ -57,7 +51,23 @@ public class GestionTitanic {
 		this.listaBotes = listaBotes;
 	}
 	
-	public void startProgram() throws InterruptedException {
+	public ArrayList<Pasajero> getListaPasajeros() {
+		return listaPasajeros;
+	}
+
+	public void setListaPasajeros(ArrayList<Pasajero> listaPasajeros) {
+		this.listaPasajeros = listaPasajeros;
+	}
+
+	public ArrayList<Tripulante> getListaTripulantes() {
+		return listaTripulantes;
+	}
+
+	public void setListaTripulantes(ArrayList<Tripulante> listaTripulantes) {
+		this.listaTripulantes = listaTripulantes;
+	}
+
+	public Mapa startProgram() throws InterruptedException {
 		separarPasajerosYTripulantes();
 		
 		for(int i = 0; i < Zona.getVectZona().length; i++) {
@@ -86,7 +96,7 @@ public class GestionTitanic {
 			}
 		}
 		
-		vista.mostrarMapaVista(mapaBote);
+		return mapaBote;
 
 	}
 	
@@ -224,10 +234,13 @@ public class GestionTitanic {
 				tempArray.add(listaPasajeros.get(i));
 			}
 		}
-		if(!tempArray.isEmpty()) {
+		if(!tempArray.isEmpty() && tempArray.size() >= 1) {
 			int i = random.nextInt(tempArray.size());
 			mapaBote.insMapa(bote, tempArray.get(i));
 			listaPasajeros.remove(tempArray.get(i));
+		}else if(tempArray.size() == 1) {
+			mapaBote.insMapa(bote, tempArray.get(0));
+			listaPasajeros.remove(tempArray.get(0));
 		}
 	}
 
