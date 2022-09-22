@@ -6,7 +6,7 @@ public enum Zona {
 	PROA(List.of(4, 9, 24)), POPA(List.of(5, 7, 45)), BABOR(List.of(34, 23, 12)), ESTRIBOR(List.of(1, 21, 14));
 	
 	private List<Integer> escalerasAcceso;
-	private static Zona[] vectZona = Zona.values();;
+	private static Zona[] vectZona = Zona.values();
 
 	private Zona(List<Integer> escalerasAcceso) {
 		this.escalerasAcceso = escalerasAcceso;
